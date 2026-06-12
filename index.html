@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajdeep Sharma — eLearning Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:#1A1A17}
+::-webkit-scrollbar-thumb{background:#C8501A;border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:#E07A52}
+::-webkit-scrollbar-corner{background:#1A1A17}
+* { scrollbar-width: thin; scrollbar-color: #C8501A #1A1A17; }
+
+:root{
+  --bg:#F7F5F0;
+  --bg2:#EFECE5;
+  --bg3:#E8E4DB;
+  --white:#FFFFFF;
+  --ink:#1A1A17;
+  --ink2:#4A4A44;
+  --ink3:#888880;
+  --accent:#C8501A;
+  --accent-light:#F5EAE4;
+  --accent-mid:#E07A52;
+  --border:#D8D4CB;
+  --border2:#C8501A;
+  /* Trendy section accent colors */
+  --violet:#6C3AF5;
+  --violet-light:#EEE8FF;
+  --teal:#0D9488;
+  --teal-light:#E0F7F5;
+  --amber:#D97706;
+  --amber-light:#FEF3C7;
+  --indigo:#3730A3;
+  --indigo-light:#EEF2FF;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --r:10px;
+  --r-lg:16px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,245,240,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 clamp(1.5rem,5vw,5rem);display:flex;align-items:center;justify-content:space-between;height:58px}
+.nav-logo{font-family:var(--serif);font-size:1.3rem;color:var(--ink);text-decoration:none;letter-spacing:-0.01em}
+.nav-logo em{color:var(--accent);font-style:italic}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--ink2);text-decoration:none;font-size:0.875rem;font-weight:500;transition:color 0.15s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:var(--ink);color:var(--bg);padding:0.45rem 1.2rem;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:600;letter-spacing:0.01em;transition:background 0.15s}
+.nav-cta:hover{background:var(--accent)}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:5rem clamp(1.5rem,5vw,5rem) 4rem;position:relative;overflow:hidden}
+#hero > *:not(#hero-network-canvas) {position:relative;z-index:1}
+#hero-network-canvas {position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.8rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+.hero-eyebrow::before{content:'';width:24px;height:1.5px;background:var(--accent)}
+h1{font-family:var(--serif);font-size:clamp(3rem,7vw,5.5rem);font-weight:400;line-height:1.0;letter-spacing:-0.02em;color:var(--ink);margin-bottom:1.5rem}
+h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:1.1rem;color:var(--ink2);max-width:480px;line-height:1.75;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:4rem}
+/* HERO ACTIONS BUTTONS */
+.btn-primary{background:var(--accent);color:#fff;padding:0.8rem 2rem;border-radius:var(--r);text-decoration:none;font-weight:600;font-size:0.9rem;letter-spacing:0.01em;transition:background 0.25s ease,transform 0.25s ease,box-shadow 0.25s ease}
+.btn-primary:hover{background:#a33e12;transform:translateY(-2px);box-shadow:0 6px 20px rgba(200, 80, 26, 0.25)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--border);padding:0.8rem 2rem;border-radius:var(--r);text-decoration:none;font-weight:500;font-size:0.9rem;transition:border-color 0.25s ease,background 0.25s ease,transform 0.25s ease,box-shadow 0.25s ease}
+.btn-ghost:hover{border-color:white(--accent);background:var(--accent-light);transform:translateY(-2px);box-shadow:0 6px 20px rgba(255, 255, 255)}
+.hero-stats{display:flex;gap:3rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid var(--border)}
+.stat-n{font-family:var(--serif);font-size:2.2rem;color:var(--ink);line-height:1}
+.stat-n sup{font-size:1rem;color:var(--accent)}
+.stat-l{font-size:0.78rem;color:var(--ink3);margin-top:0.2rem;letter-spacing:0.03em}
+.hero-rule{position:absolute;right:0;top:0;bottom:0;width:1px;background:var(--border);display:none}
+@media(min-width:900px){.hero-rule{display:block}}
+
+/* MARQUEE strip */
+.marquee-wrap{background:var(--accent);overflow:hidden;padding:0.6rem 0;white-space:nowrap}
+.marquee-inner{display:inline-flex;animation:marquee 22s linear infinite}
+.marquee-inner span{font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;padding:0 1.5rem}
+.marquee-dot{color:rgba(255,255,255,0.45)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.marquee-inner{animation:none}}
+
+/* SECTION BASE */
+section{padding:5rem clamp(1.5rem,5vw,5rem)}
+.sec-eye{font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:400;letter-spacing:-0.02em;color:var(--ink);line-height:1.1}
+.sec-desc{color:var(--ink2);font-size:0.95rem;max-width:480px;margin-top:0.75rem;line-height:1.7}
+
+/* TOOLS */
+#tools{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.tools-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.75rem}
+.t-chip{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:0.6rem 0.9rem;display:flex;align-items:center;gap:0.6rem;font-size:0.85rem;font-weight:500;color:var(--ink2);transition:border-color 0.25s ease,color 0.25s ease,transform 0.25s ease,box-shadow 0.25s ease}
+.t-chip:hover{border-color:var(--accent);color:var(--ink);transform:translateY(-3px);box-shadow:0 4px 12px rgba(200, 80, 26, 0.05)}
+.t-cat{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.cat-a{background:#C8501A}.cat-b{background:#2D7A6A}.cat-c{background:#7C4DA0}.cat-d{background:#2E6EA6}.cat-e{background:#888880}
+
+/* ─── COMPLEXITY LEVELS SECTION ─────────────────────────── */
+/* ─── COMPLEXITY LEVELS SECTION ─────────────────────────── */
+#levels{
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  padding: 5rem clamp(1.5rem,5vw,5rem);
+  position: relative;
+  overflow: hidden;
+}
+#levels::before{
+  content:'';
+  position:absolute;inset:0;
+  background: radial-gradient(ellipse 60% 40% at 80% 20%, rgba(200, 80, 26, 0.03) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 50% at 20% 80%, rgba(13, 148, 136, 0.03) 0%, transparent 70%);
+  pointer-events:none;
+}
+#levels .sec-eye{color:var(--accent)}
+#levels h2{color:var(--ink)}
+#levels .sec-desc{color:var(--ink2);max-width:560px}
+
+.levels-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1.25rem;
+  margin-top:3rem;
+  position:relative;z-index:1;
+}
+
+.level-card{
+  display: flex;
+  flex-direction: column;
+  border-radius:var(--r-lg);
+  padding:2rem 1.75rem;
+  position:relative;
+  overflow:hidden;
+  border: 1px solid var(--border);
+  transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor:default;
+}
+.level-card:hover{
+  transform:translateY(-6px);
+  box-shadow: 0 12px 30px rgba(200, 80, 26, 0.08);
+  border-color: var(--accent);
+}
+
+/* Individual card color themes - Solid & Warm */
+.level-card.lv1{
+  background: #FDFBF7;
+  border-color: #E6E2D8;
+}
+.level-card.lv1 .lv-num{color:#8A7A5F}
+.level-card.lv1 .lv-bar{background:#8A7A5F}
+.level-card.lv1 .lv-title{color:var(--ink)}
+.level-card.lv1 .lv-name{color:var(--ink2)}
+.level-card.lv1 .lv-desc{color:var(--ink2)}
+.level-card.lv1 .lv-badge{background:#F3EFE3;color:#8A7A5F;border:1px solid #DFD9C8}
+
+.level-card.lv2{
+  background: #F9F2E7;
+  border-color: #E6DBC9;
+}
+.level-card.lv2 .lv-num{color:#B25E38}
+.level-card.lv2 .lv-bar{background:#B25E38}
+.level-card.lv2 .lv-title{color:var(--ink)}
+.level-card.lv2 .lv-name{color:var(--ink2)}
+.level-card.lv2 .lv-desc{color:var(--ink2)}
+.level-card.lv2 .lv-badge{background:#F3E7D5;color:#B25E38;border:1px solid #E3D2BC}
+
+.level-card.lv3{
+  background: #F5EAE0;
+  border-color: #E2CEBE;
+}
+.level-card.lv3 .lv-num{color:#C8501A}
+.level-card.lv3 .lv-bar{background:#C8501A}
+.level-card.lv3 .lv-title{color:var(--ink)}
+.level-card.lv3 .lv-name{color:var(--ink2)}
+.level-card.lv3 .lv-desc{color:var(--ink2)}
+.level-card.lv3 .lv-badge{background:#ECDCCA;color:#C8501A;border:1px solid #DCBEA6}
+
+.level-card.lv4{
+  background: #EEDCCB;
+  border-color: #DCBEA7;
+}
+.level-card.lv4 .lv-num{color:#A45D14}
+.level-card.lv4 .lv-bar{background:#A45D14}
+.level-card.lv4 .lv-title{color:var(--ink)}
+.level-card.lv4 .lv-name{color:var(--ink2)}
+.level-card.lv4 .lv-desc{color:var(--ink2)}
+.level-card.lv4 .lv-badge{background:#E2CDBC;color:#A45D14;border:1px solid #D2AE92}
+
+.lv-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem}
+.lv-num{font-family:var(--serif);font-size:2rem;font-weight:400;line-height:1;letter-spacing:-0.03em}
+.lv-badge{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.6rem;border-radius:20px}
+.lv-bar{height:2px;width:32px;border-radius:1px;margin-bottom:1rem}
+.lv-title{font-family:var(--serif);font-size:1.2rem;line-height:1.2;margin-bottom:0.3rem}
+.lv-name{font-size:0.78rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.9rem}
+.lv-desc{font-size:0.83rem;line-height:1.65}
+.lv-actions{margin-top:auto;padding-top:1.5rem;display:flex;gap:0.6rem;flex-wrap:wrap}
+.lv-btn{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;padding:0.45rem 1rem;border-radius:6px;text-decoration:none;transition:opacity 0.15s,transform 0.1s;border:1px solid}
+.lv-btn:hover{opacity:0.85;transform:translateY(-1px)}
+.lv-btn.disabled{opacity:0.4;pointer-events:none}
+
+/* ─── INSTRUCTIONAL DESIGN SECTION ─────────────────────── */
+#id-work{
+  background: #FAFAF8;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+#id-work .sec-eye{color:var(--violet)}
+
+.id-intro{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:3rem}
+
+.id-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
+
+.id-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.id-card:hover{
+  border-color:var(--violet);
+  transform:translateY(-6px);
+  box-shadow: 0 12px 30px rgba(108, 58, 245, 0.08);
+}
+
+.id-card-top{
+  padding:1.5rem 1.5rem 0;
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  margin-bottom:1rem;
+}
+.id-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.id-icon.vi{background:var(--violet-light)}
+.id-icon.te{background:var(--teal-light)}
+.id-icon.am{background:var(--amber-light)}
+.id-icon.in{background:var(--indigo-light)}
+
+.id-card-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
+.id-card-label.vi{color:var(--violet)}
+.id-card-label.te{color:var(--teal)}
+.id-card-label.am{color:var(--amber)}
+.id-card-label.in{color:var(--indigo)}
+
+.id-card-body{padding:0 1.5rem 1.5rem}
+.id-card-title{font-family:var(--serif);font-size:1.05rem;color:var(--ink);line-height:1.25;margin-bottom:0.5rem}
+.id-card-desc{font-size:0.82rem;color:var(--ink2);line-height:1.65}
+
+.id-detail{margin-top:0.85rem;padding-top:0.85rem;border-top:1px solid var(--border)}
+.id-detail-item{display:flex;gap:0.5rem;align-items:flex-start;font-size:0.8rem;color:var(--ink3);line-height:1.5;margin-bottom:0.35rem}
+.id-detail-item::before{content:'▸';color:var(--violet);font-size:0.65rem;margin-top:0.28rem;flex-shrink:0}
+.id-detail-item.te::before{color:var(--teal)}
+.id-detail-item.am::before{color:var(--amber)}
+.id-detail-item.in::before{color:var(--indigo)}
+
+/* ─── VR & GAME PROJECT LINKS ───────────────────────────── */
+/* ─── VR & GAME PROJECT LINKS ───────────────────────────── */
+#special-projects{
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 5rem clamp(1.5rem,5vw,5rem);
+  position:relative;overflow:hidden;
+}
+#special-projects::before{
+  content:'';position:absolute;inset:0;
+  background: radial-gradient(ellipse 70% 50% at 30% 50%, rgba(200, 80, 26, 0.02) 0%, transparent 60%);
+  pointer-events:none;
+}
+#special-projects .sec-eye{color:var(--accent)}
+#special-projects h2{color:var(--ink)}
+#special-projects .sec-desc{color:var(--ink2)}
+
+.sp-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1.25rem;
+  margin-top:2.5rem;
+  position:relative;z-index:1;
+}
+
+.sp-card{
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:2rem;
+  transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration:none;
+  display:block;
+}
+.sp-card:hover{
+  border-color: var(--accent);
+  transform:translateY(-6px);
+  box-shadow: 0 12px 30px rgba(200, 80, 26, 0.08);
+}
+.sp-card-icon{font-size:2rem;margin-bottom:1rem;display:block}
+.sp-card-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem}
+.sp-card-title{font-family:var(--serif);font-size:1.2rem;color:var(--ink);line-height:1.2;margin-bottom:0.5rem}
+.sp-card-desc{font-size:0.83rem;color:var(--ink2);line-height:1.6;margin-bottom:1.25rem}
+.sp-card-cta{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.8rem;font-weight:600;color:var(--accent);transition:gap 0.15s}
+.sp-card:hover .sp-card-cta{gap:0.7rem}
+.sp-card.vr .sp-card-label{color:#0D9488}
+.sp-card.vr .sp-card-cta{color:#0D9488}
+.sp-card.vr:hover{border-color:#0D9488}
+.sp-card.game .sp-card-label{color:#B25E38}
+.sp-card.game .sp-card-cta{color:#B25E38}
+.sp-card.game:hover{border-color:#B25E38}
+
+/* PORTFOLIO */
+#portfolio{background:var(--bg)}
+.port-head{margin-bottom:3rem}
+.port-head-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
+.port-count{font-size:0.8rem;color:var(--ink3);font-weight:500}
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5rem}
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1)}
+.c-card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow: 0 12px 30px rgba(200, 80, 26, 0.08)}
+.c-card.live{border-color:var(--accent)}
+.c-thumb{aspect-ratio:16/9;background:var(--bg2);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.thumb-pcb{background:#1C3329}
+.thumb-esd{background:#1E1429}
+.thumb-safety{background:#131D13}
+.thumb-ai{background:#131820}
+.c-badge{position:absolute;top:10px;right:10px;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.25rem 0.55rem;border-radius:4px}
+.badge-live{background:var(--accent);color:#fff}
+.badge-soon{background:rgba(0,0,0,0.45);color:rgba(255,255,255,0.7)}
+.c-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;gap:0.6rem}
+.c-sector{font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent)}
+.c-title{font-family:var(--serif);font-size:1.1rem;color:var(--ink);line-height:1.25}
+.c-desc{font-size:0.83rem;color:var(--ink2);line-height:1.6;flex:1}
+.c-tags{display:flex;gap:0.4rem;flex-wrap:wrap;padding-top:0.75rem;border-top:1px solid var(--border)}
+.tag{font-size:0.7rem;font-weight:500;background:var(--bg2);border:1px solid var(--border);color:var(--ink3);padding:0.2rem 0.5rem;border-radius:4px}
+.c-foot{padding:0 1.25rem 1.25rem}
+.btn-launch{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;padding:0.65rem;background:var(--accent);color:#fff;border:none;border-radius:var(--r);cursor:pointer;font-size:0.875rem;font-weight:600;text-decoration:none;transition:background 0.25s ease,transform 0.25s ease,box-shadow 0.25s ease}
+.btn-launch:hover{background:#a33e12;transform:translateY(-2px);box-shadow: 0 6px 20px rgba(200, 80, 26, 0.25)}
+.btn-launch.off{background:var(--bg2);color:var(--ink3);border:1px solid var(--border);cursor:default}
+.btn-launch.off:hover{background:var(--bg2);transform:none}
+.arr{transition:transform 0.15s}
+.btn-launch:not(.off):hover .arr{transform:translateX(3px)}
+
+/* PROCESS */
+#process{background:var(--white);border-top:1px solid var(--border)}
+.proc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:3rem;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.proc-step{padding:2rem 1.5rem;border-right:1px solid var(--border)}
+.proc-step:last-child{border-right:none}
+.proc-n{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;color:var(--accent);margin-bottom:1rem}
+.proc-icon{font-size:1.5rem;margin-bottom:0.75rem;display:block}
+.proc-title{font-family:var(--serif);font-size:1.1rem;color:var(--ink);margin-bottom:0.5rem;line-height:1.2}
+.proc-desc{font-size:0.82rem;color:var(--ink2);line-height:1.6}
+@media(max-width:700px){.proc-step{border-right:none;border-bottom:1px solid var(--border)}.proc-step:last-child{border-bottom:none}}
+
+/* ABOUT */
+#about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+@media(max-width:800px){.about-grid{grid-template-columns:1fr;gap:2.5rem}}
+.about-body p{color:var(--ink2);line-height:1.8;margin-bottom:1rem;font-size:0.95rem}
+.about-list{margin-top:1.5rem;display:flex;flex-direction:column;gap:0.6rem}
+.about-item{display:flex;gap:0.75rem;align-items:flex-start;font-size:0.88rem;color:var(--ink2)}
+.about-item::before{content:'→';color:var(--accent);font-weight:600;flex-shrink:0;margin-top:0.05rem}
+.exp-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.exp-card-head{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);background:var(--bg2)}
+.exp-card-head p{font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink3)}
+.exp-item{display:flex;gap:1.25rem;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)}
+.exp-item:last-child{border-bottom:none}
+.exp-line{display:flex;flex-direction:column;align-items:center;gap:0}
+.exp-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:4px}
+.exp-connector{width:1.5px;background:var(--border);flex:1;min-height:20px;margin-top:4px}
+.exp-role{font-size:0.92rem;font-weight:600;color:var(--ink)}
+.exp-co{font-size:0.83rem;color:var(--accent);margin:0.15rem 0}
+.exp-yr{font-size:0.78rem;color:var(--ink3)}
+.edu-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;margin-top:1rem}
+.edu-card p{font-size:0.83rem;color:var(--ink2)}
+.edu-card p strong{color:var(--ink);font-weight:600}
+
+/* CONTACT */
+#contact{background:var(--ink);color:#fff;text-align:center}
+#contact .sec-eye{color:var(--accent-mid)}
+#contact h2{color:#fff;max-width:520px;margin:0 auto}
+.contact-sub{color:rgba(255,255,255,0.55);margin:0.75rem auto 2.5rem;max-width:420px;font-size:0.95rem}
+.contact-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cb{display:flex;align-items:center;gap:0.5rem;padding:0.8rem 1.75rem;border-radius:var(--r);text-decoration:none;font-weight:600;font-size:0.9rem;transition:transform 0.1s,opacity 0.15s}
+.cb:hover{transform:translateY(-2px);opacity:0.9}
+.cb-accent{background:var(--accent);color:#fff}
+.cb-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.2)}
+.cb-outline:hover{border-color:rgba(255,255,255,0.5)}
+.contact-email{margin-top:3rem;font-size:0.83rem;color:rgba(255,255,255,0.35)}
+.contact-email a{color:rgba(255,255,255,0.6);text-decoration:none}
+.contact-email a:hover{color:#fff}
+
+/* FOOTER */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.08);padding:1.5rem clamp(1.5rem,5vw,5rem);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.f-note{font-size:0.78rem;color:rgba(255,255,255,0.3)}
+.f-note a{color:rgba(255,255,255,0.5);text-decoration:none}
+.f-note a:hover{color:#fff}
+
+@media(max-width:640px){.nav-links{display:none}.hero-stats{gap:1.5rem}.proc-grid{grid-template-columns:1fr}.levels-grid{grid-template-columns:1fr}.id-grid{grid-template-columns:1fr}.sp-grid{grid-template-columns:1fr}}
+
+/* SCROLL PROGRESS BAR */
+#scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  z-index: 1001;
+  pointer-events: none;
+}
+#scroll-progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-mid) 100%);
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px rgba(200, 80, 26, 0.4);
+  transition: width 0.05s linear;
+}
+</style>
+</head>
+<body>
+
+<div id="scroll-progress-container">
+  <div id="scroll-progress"></div>
+</div>
+
+<nav>
+  <a class="nav-logo" href="#">Raj Sharma<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#levels">Course Levels</a></li>
+    <li><a href="#id-work">ID Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Hire me</a>
+</nav>
+
+<section id="hero">
+  <canvas id="hero-network-canvas"></canvas>
+  <div class="hero-rule"></div>
+  <div class="hero-eyebrow">Open to remote work worldwide</div>
+  <h1>eLearning<br>Developer &amp;<br><em>Instructional</em><br>Designer</h1>
+  <p class="hero-sub">I build interactive SCORM courses, 3D training modules, and scenario-based eLearning — for corporate and vocational learners globally.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#portfolio">View demo courses</a>
+    <a class="btn-ghost" href="CV-Rajdeep Sharma -E---learning Programmer -- .pdf" download>Download CV</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-n">4<sup>+</sup></div><div class="stat-l">Years experience</div></div>
+    <div><div class="stat-n">100<sup>+</sup></div><div class="stat-l">Courses delivered</div></div>
+    <div><div class="stat-n">5<sup>+</sup></div><div class="stat-l">Authoring tools</div></div>
+    <div><div class="stat-n">2</div><div class="stat-l">Organisations served</div></div>
+  </div>
+</section>
+
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Articulate Storyline 360</span><span class="marquee-dot">·</span>
+    <span>SCORM 1.2 / 2004</span><span class="marquee-dot">·</span>
+    <span>Moodle LMS</span><span class="marquee-dot">·</span>
+    <span>Adobe Captivate</span><span class="marquee-dot">·</span>
+    <span>Rise 360</span><span class="marquee-dot">·</span>
+    <span>Three.js 3D</span><span class="marquee-dot">·</span>
+    <span>Camtasia</span><span class="marquee-dot">·</span>
+    <span>AI Tools</span><span class="marquee-dot">·</span>
+    <span>ADDIE Model</span><span class="marquee-dot">·</span>
+    <span>Bloom's Taxonomy</span><span class="marquee-dot">·</span>
+    <span>Articulate Storyline 360</span><span class="marquee-dot">·</span>
+    <span>SCORM 1.2 / 2004</span><span class="marquee-dot">·</span>
+    <span>Moodle LMS</span><span class="marquee-dot">·</span>
+    <span>Adobe Captivate</span><span class="marquee-dot">·</span>
+    <span>Rise 360</span><span class="marquee-dot">·</span>
+    <span>Three.js 3D</span><span class="marquee-dot">·</span>
+    <span>Camtasia</span><span class="marquee-dot">·</span>
+    <span>AI Tools</span><span class="marquee-dot">·</span>
+    <span>ADDIE Model</span><span class="marquee-dot">·</span>
+    <span>Bloom's Taxonomy</span><span class="marquee-dot">·</span>
+  </div>
+</div>
+
+<section id="tools">
+  <div class="tools-head">
+    <div>
+      <div class="sec-eye">Toolkit</div>
+      <h2>Tools &amp; technologies</h2>
+    </div>
+  </div>
+  <div class="tools-grid">
+    <div class="t-chip"><span class="t-cat cat-a"></span>Storyline 360</div>
+    <div class="t-chip"><span class="t-cat cat-a"></span>Rise 360</div>
+    <div class="t-chip"><span class="t-cat cat-a"></span>Adobe Captivate</div>
+    <div class="t-chip"><span class="t-cat cat-a"></span>Articulate Quiz Maker</div>
+    <div class="t-chip"><span class="t-cat cat-b"></span>Moodle LMS</div>
+    <div class="t-chip"><span class="t-cat cat-b"></span>SCORM 1.2 / 2004</div>
+    <div class="t-chip"><span class="t-cat cat-b"></span>LMS Deployment</div>
+    <div class="t-chip"><span class="t-cat cat-c"></span>Adobe Illustrator</div>
+    <div class="t-chip"><span class="t-cat cat-c"></span>After Effects</div>
+    <div class="t-chip"><span class="t-cat cat-c"></span>Premiere Pro</div>
+    <div class="t-chip"><span class="t-cat cat-c"></span>Camtasia</div>
+    <div class="t-chip"><span class="t-cat cat-d"></span>HTML / CSS</div>
+    <div class="t-chip"><span class="t-cat cat-d"></span>Three.js (3D)</div>
+    <div class="t-chip"><span class="t-cat cat-e"></span>AI &amp; Prompt Engineering</div>
+    <div class="t-chip"><span class="t-cat cat-e"></span>ADDIE Model</div>
+    <div class="t-chip"><span class="t-cat cat-e"></span>Bloom's Taxonomy</div>
+  </div>
+</section>
+
+<!-- ─── PORTFOLIO ─────────────────────────────────────────── -->
+<section id="portfolio">
+  <div class="port-head">
+    <div class="port-head-row">
+      <div>
+        <div class="sec-eye">Portfolio</div>
+        <h2>Demo courses</h2>
+      </div>
+      <div class="port-count">1 live · 3 in progress</div>
+    </div>
+    <p class="sec-desc">Click Launch to experience each course in your browser — no LMS or login needed.</p>
+  </div>
+</section>
+
+<!-- ─── COURSE COMPLEXITY LEVELS ─────────────────────────── -->
+<section id="levels">
+  <div class="sec-eye">Course Complexity</div>
+  <h2>Four levels of eLearning</h2>
+  <p class="sec-desc">From clean compliance modules to fully immersive gamified experiences — each level is designed for a specific learner need and budget.</p>
+
+  <div class="levels-grid">
+
+    <!-- Level 1 -->
+    <div class="level-card lv1">
+      <div class="lv-top">
+        <div class="lv-num">01</div>
+        <span class="lv-badge">Live</span>
+      </div>
+      <div class="lv-bar"></div>
+      <div class="lv-title">Health &amp; Safety</div>
+      <div class="lv-name">Foundational · No Audio</div>
+      <div class="lv-desc">Corporate-branded slides with play/pause, next, and back navigation. Clean, accessible, and SCORM-ready with bookmarking and score tracking built in.</div>
+      <div class="lv-actions">
+        <a href="https://360.articulate.com/review/content/e5ade2fb-ba07-4744-8722-e3a5a04e1e59/review" target="_blank" class="lv-btn" style="background:#8A7A5F;color:#fff;border-color:#8A7A5F">
+          Launch ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Level 2 -->
+    <div class="level-card lv2">
+      <div class="lv-top">
+        <div class="lv-num">02</div>
+        <span class="lv-badge">Live</span>
+      </div>
+      <div class="lv-bar"></div>
+      <div class="lv-title">Business Correspondent</div>
+      <div class="lv-name">Interactive · Rich Media</div>
+      <div class="lv-desc">Complex interactivities — drag-and-drop, hotspots, categorize — requiring detailed storyboarding. Learners manipulate objects with mouse or keyboard.</div>
+      <div class="lv-actions">
+        <a href="https://360.articulate.com/review/content/8eb2783a-ca6c-443a-ac62-2914e1042f43/review" target="_blank" class="lv-btn" style="background:#B25E38;color:#fff;border-color:#B25E38">
+          Launch ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Level 3 -->
+    <div class="level-card lv3">
+      <div class="lv-top">
+        <div class="lv-num">03</div>
+        <span class="lv-badge">Live</span>
+      </div>
+      <div class="lv-bar"></div>
+      <div class="lv-title">Advanced Scenario</div>
+      <div class="lv-name">Voiceover · Branching · SCORM</div>
+      <div class="lv-desc">Neutral English voiceover, financial simulations, software environments, and multi-step branching scenarios with deep SCORM communication.</div>
+      <div class="lv-actions">
+        <a href="#" target="_blank" class="lv-btn" style="background:#C8501A;color:#fff;border-color:#C8501A">
+          Launch ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Level 4 -->
+    <div class="level-card lv4">
+      <div class="lv-top">
+        <div class="lv-num">04</div>
+        <span class="lv-badge">Live</span>
+      </div>
+      <div class="lv-bar"></div>
+      <div class="lv-title">Gamification</div>
+      <div class="lv-name">Points · Badges · Leaderboards</div>
+      <div class="lv-desc">Game mechanics — points, badges, leaderboards, challenges — woven into learning to drive engagement, retention, and measurable outcomes.</div>
+      <div class="lv-actions">
+        <a href="#" target="_blank" class="lv-btn" style="background:#A45D14;color:#fff;border-color:#A45D14">
+          Launch ↗
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SPECIAL PROJECTS: VR + GAME ──────────────────────── -->
+<section id="special-projects">
+  <div style="position:relative;z-index:1">
+    <div class="sec-eye">Experimental Projects</div>
+    <h2>Beyond the LMS</h2>
+    <p class="sec-desc">Pushing the boundaries of what eLearning can look and feel like — from immersive VR to browser-based games.</p>
+  </div>
+  <div class="sp-grid">
+
+    <a href="https://360.articulate.com/review/content/a3cbd6ca-084f-4a46-8f37-a609c7d3bc60/review" class="sp-card vr" target="_blank">
+      <!-- Replace href with actual VR project link -->
+      <span class="sp-card-icon">🥽</span>
+      <div class="sp-card-label">Virtual Reality</div>
+      <div class="sp-card-title">VR Training Environment</div>
+      <div class="sp-card-desc">Immersive 3D learning environment for hands-on skill practice without real-world risk. Built for WebXR compatibility.</div>
+      <div class="sp-card-cta">Explore project →</div>
+    </a>
+
+    <a href="https://360.articulate.com/review/content/ff7d27bc-d048-435d-95a1-46dda982bd06/review" class="sp-card game" target="_blank">
+      <!-- Replace href with actual Mario Game link -->
+      <span class="sp-card-icon">🎮</span>
+      <div class="sp-card-label">Browser Game</div>
+      <div class="sp-card-title">Mario-style Learning Game</div>
+      <div class="sp-card-desc">A custom browser game built to embed learning objectives inside gameplay mechanics. Demonstrates Level 4 gamification principles in action.</div>
+      <div class="sp-card-cta">Play now →</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── INSTRUCTIONAL DESIGN WORK ────────────────────────── -->
+<section id="id-work">
+  <div class="id-intro">
+    <div>
+      <div class="sec-eye">Instructional Design</div>
+      <h2>How I design for learning</h2>
+      <p class="sec-desc" style="max-width:520px">Behind every course is a structured design process — from storyboards to scenario blueprints. Here's what my ID work looks like in practice.</p>
+    </div>
+  </div>
+
+  <div class="id-grid">
+
+    <div class="id-card">
+      <div class="id-card-top">
+        <div class="id-icon vi">🗂️</div>
+        <div class="id-card-label vi">Storyboarding</div>
+      </div>
+      <div class="id-card-body">
+        <div class="id-card-title">Storyboard Design in Storyline</div>
+        <div class="id-card-desc">I build annotated slide-by-slide storyboards that map each screen to a learning objective, interaction type, and asset list — before a single trigger is written.</div>
+        <div class="id-detail">
+          <div class="id-detail-item">Slide layout with on-screen text, visuals, and audio script</div>
+          <div class="id-detail-item">Interaction notes: click states, layers, branching logic</div>
+          <div class="id-detail-item">Client-ready format for sign-off before development</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="id-card">
+      <div class="id-card-top">
+        <div class="id-icon te">🎯</div>
+        <div class="id-card-label te">Learning Objectives</div>
+      </div>
+      <div class="id-card-body">
+        <div class="id-card-title">Bloom's Taxonomy Alignment</div>
+        <div class="id-card-desc">Every module starts with performance-based objectives written at the right cognitive level — from recall for compliance to synthesis for problem-solving courses.</div>
+        <div class="id-detail">
+          <div class="id-detail-item te">Objectives mapped to Bloom's six levels</div>
+          <div class="id-detail-item te">Assessment items directly tied to each objective</div>
+          <div class="id-detail-item te">Gap analysis between current and desired performance</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="id-card">
+      <div class="id-card-top">
+        <div class="id-icon am">🔀</div>
+        <div class="id-card-label am">Scenario Design</div>
+      </div>
+      <div class="id-card-body">
+        <div class="id-card-title">Branching Scenario Blueprints</div>
+        <div class="id-card-desc">I design branching decision trees using Cathy Moore's action-mapping approach — keeping scenarios grounded in real job tasks, not abstract theory.</div>
+        <div class="id-detail">
+          <div class="id-detail-item am">Action map showing business goal → tasks → practice activities</div>
+          <div class="id-detail-item am">Consequence-driven paths with realistic outcomes</div>
+          <div class="id-detail-item am">Built in Storyline 360 with variables and triggers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="id-card">
+      <div class="id-card-top">
+        <div class="id-icon in">📊</div>
+        <div class="id-card-label in">Assessment Design</div>
+      </div>
+      <div class="id-card-body">
+        <div class="id-card-title">Quiz &amp; Evaluation Strategy</div>
+        <div class="id-card-desc">I design assessments that actually measure learning — not just recall. From formative check-ins to summative SCORM-tracked quizzes with retry logic and feedback layers.</div>
+        <div class="id-detail">
+          <div class="id-detail-item in">Question types matched to objective complexity</div>
+          <div class="id-detail-item in">Custom feedback for correct and incorrect responses</div>
+          <div class="id-detail-item in">SCORM score reporting to Moodle LMS</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── PROCESS ───────────────────────────────────────────── -->
+<section id="process">
+  <div>
+    <div class="sec-eye">How I work</div>
+    <h2>My development process</h2>
+    <p class="sec-desc">Every course follows a structured, client-centred process from discovery to deployment.</p>
+  </div>
+  <div class="proc-grid">
+    <div class="proc-step">
+      <div class="proc-n">01 · Analyze</div>
+      <span class="proc-icon">🔍</span>
+      <div class="proc-title">Needs analysis</div>
+      <div class="proc-desc">Learner profiling, business goal mapping, SME interviews, performance gap identification.</div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-n">02 · Design</div>
+      <span class="proc-icon">📐</span>
+      <div class="proc-title">Storyboard &amp; blueprint</div>
+      <div class="proc-desc">Learning objectives via Bloom's Taxonomy, interaction design, visual storyboard for client sign-off.</div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-n">03 · Develop</div>
+      <span class="proc-icon">⚙️</span>
+      <div class="proc-title">Build &amp; iterate</div>
+      <div class="proc-desc">Storyline 360, Rise, or custom HTML. Graphics, animation, audio narration, SCORM packaging.</div>
+    </div>
+    <div class="proc-step">
+      <div class="proc-n">04 · Deploy</div>
+      <span class="proc-icon">✅</span>
+      <div class="proc-title">QA &amp; LMS launch</div>
+      <div class="proc-desc">Cross-browser testing, SCORM validation, Moodle upload, post-launch support and iteration.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─────────────────────────────────────────────── -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="sec-eye">About me</div>
+      <h2>4+ years turning complex topics into clear learning</h2>
+      <div class="about-body" style="margin-top:1.5rem">
+        <p>I'm an eLearning Developer based in Bhopal, India, currently open to remote opportunities worldwide. I specialise in Storyline 360 courses, 3D interactive elements, and SCORM-packaged content for corporate and vocational training.</p>
+        <p>eLearning Developer with 4+ years of experience and a strong background in vocational and corporate learning content development. At AISECT India, responsible for end-to-end eLearning project delivery including course development, SCORM packaging, LMS deployment, SME coordination, quality assurance, stakeholder management, and AI-assisted content creation. Skilled in transforming complex learning requirements into engaging digital learning experiences using Articulate Storyline 360, Rise 360, Adobe Captivate, and multimedia authoring tools while ensuring quality, scalability, and timely project execution.</p>
+      </div>
+      <div class="about-list">
+        <div class="about-item">Storyline 360 — advanced interactions, variables, triggers</div>
+        <div class="about-item">3D interactives via Three.js embedded in Storyline iframes</div>
+        <div class="about-item">SCORM 1.2 / 2004 packaging &amp; Moodle LMS deployment</div>
+        <div class="about-item">AI tools for scripting, image generation &amp; workflow speed</div>
+        <div class="about-item">B.Com (Computer) + MBA (Marketing &amp; HR)</div>
+      </div>
+    </div>
+    <div>
+      <div class="exp-card">
+        <div class="exp-card-head"><p>Experience</p></div>
+        <div class="exp-item">
+          <div class="exp-line"><div class="exp-dot"></div><div class="exp-connector"></div></div>
+          <div>
+            <div class="exp-role">Executive — eLearning Developer</div>
+            <div class="exp-co">AISECT India</div>
+            <div class="exp-yr">April 2022 – Present · 3+ years</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-line"><div class="exp-dot" style="background:var(--ink3)"></div></div>
+          <div>
+            <div class="exp-role">Sr. eLearning Developer</div>
+            <div class="exp-co">Alogic Data</div>
+            <div class="exp-yr">June 2020 – March 2022 · ~2 years</div>
+          </div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <p><strong>MBA</strong> — Marketing &amp; HR</p>
+        <p style="margin-top:0.3rem"><strong>B.Com</strong> (Computer)</p>
+        <p style="margin-top:0.3rem">Languages: English, Hindi</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-eye">Get in touch</div>
+  <h2>Open to remote work worldwide</h2>
+  <p class="contact-sub">Available for full-time remote positions, freelance projects, and contract work. Let's build something great together.</p>
+  <div class="contact-btns">
+    <a class="cb cb-accent" href="mailto:Rajsharma8548@gmail.com">✉ Email me</a>
+    <a class="cb cb-outline" href="https://in.linkedin.com/in/raj-sharma-49375a222" target="_blank">LinkedIn →</a>
+    <a class="btn-ghost" href="CV-Rajdeep Sharma -E---learning Programmer -- .pdf" download style="color: #FFFFFF;">Download CV</a>
+  </div>
+  <div class="contact-email">
+    Or write directly: <a href="mailto:Rajsharma8548@gmail.com">Rajsharma8548@gmail.com</a> · +91 98938 28354
+  </div>
+</section>
+
+<footer>
+  <div class="f-note">© 2025 Rajdeep Sharma · eLearning Developer &amp; Instructional Designer</div>
+  <div class="f-note">Hosted free on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+    const progressBar = document.getElementById('scroll-progress');
+    if (progressBar) {
+      progressBar.style.width = scrolled + '%';
+    }
+  });
+
+  // 3D/Interactive Particle Network Animation for Hero Background
+  (() => {
+    const canvas = document.getElementById('hero-network-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    let particleCount = 65;
+    const connectionDistance = 140;
+    let width = 0;
+    let height = 0;
+
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+      
+      if (width < 768) {
+        particleCount = 35;
+      } else {
+        particleCount = 70;
+      }
+      init();
+    }
+    
+    let mouse = { x: null, y: null, radius: 150 };
+    const heroSection = document.getElementById('hero');
+    
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    
+    heroSection.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    class Particle {
+      constructor() {
+        this.reset(true);
+      }
+      reset(initPhase = false) {
+        this.x = Math.random() * width;
+        this.y = initPhase ? Math.random() * height : height + 10;
+        this.vx = (Math.random() - 0.5) * 0.45;
+        this.vy = (Math.random() - 0.5) * 0.45;
+        this.radius = Math.random() * 1.8 + 1.2;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        if (this.x < -10 || this.x > width + 10) this.vx *= -1;
+        if (this.y < -10 || this.y > height + 10) this.vy *= -1;
+
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            this.vx += (dx / dist) * force * 0.02;
+            this.vy += (dy / dist) * force * 0.02;
+            
+            const speed = Math.hypot(this.vx, this.vy);
+            if (speed > 1.2) {
+              this.vx = (this.vx / speed) * 1.2;
+              this.vy = (this.vy / speed) * 1.2;
+            }
+          }
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(200, 80, 26, 0.45)';
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.hypot(dx, dy);
+          
+          if (dist < connectionDistance) {
+            const opacity = (1 - dist / connectionDistance) * 0.16;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(200, 80, 26, ${opacity})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+        
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = particles[i].x - mouse.x;
+          const dy = particles[i].y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < mouse.radius) {
+            const opacity = (1 - dist / mouse.radius) * 0.2;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(200, 80, 26, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+      
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    animate();
+  })();
+</script>
+
+</body>
+</html>
